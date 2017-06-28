@@ -1,0 +1,6 @@
+-isystem /usr/avr/include
+-isystem /usr/lib/gcc/avr/6.3.0/include-fixed
+-isystem /usr/lib/gcc/avr/6.3.0/include
+-nobuiltininc
+-nostdlib
+-D__AVR_ATmega328P__
