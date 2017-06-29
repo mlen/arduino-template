@@ -1,5 +1,6 @@
 # Arduino root
-ARDUINO = /usr/share/arduino
+USE_ARDUINO = yes
+ARDUINO     = /usr/share/arduino
 
 # Target name
 TARGET = blinky
@@ -22,11 +23,13 @@ SRCS = $(wildcard $(addprefix src/*,$(SRC_SUFFIXES)))
 OBJS = $(addsuffix .o,$(patsubst src%,build%,$(SRCS)))
 
 # Computed values
-ARDUINO_CORE = $(ARDUINO)/hardware/arduino/avr/cores/arduino
-ARDUINO_PINS = $(ARDUINO)/hardware/arduino/avr/variants/$(BOARD)
-ARDUINO_INCL = -I$(ARDUINO_PINS) -I$(ARDUINO_CORE)
-ARDUINO_SRCS = $(filter-out $(ARDUINO_CORE)/main.cpp,$(wildcard $(addprefix $(ARDUINO_CORE)/*,$(SRC_SUFFIXES))))
-ARDUINO_OBJS = $(addsuffix .o,$(patsubst $(ARDUINO_CORE)%,build/core%,$(ARDUINO_SRCS)))
+ifeq ($(USE_ARDUINO),yes)
+	ARDUINO_CORE = $(ARDUINO)/hardware/arduino/avr/cores/arduino
+	ARDUINO_PINS = $(ARDUINO)/hardware/arduino/avr/variants/$(BOARD)
+	ARDUINO_INCL = -I$(ARDUINO_PINS) -I$(ARDUINO_CORE)
+	ARDUINO_SRCS = $(filter-out $(ARDUINO_CORE)/main.cpp,$(wildcard $(addprefix $(ARDUINO_CORE)/*,$(SRC_SUFFIXES))))
+	ARDUINO_OBJS = $(addsuffix .o,$(patsubst $(ARDUINO_CORE)%,build/core%,$(ARDUINO_SRCS)))
+endif
 
 # Tools and default flags
 FLAGS    = -flto -fno-devirtualize -no-pie -fno-PIC -fno-PIE -Os -pipe -DF_CPU=$(F_CPU) -mmcu=$(MCU) $(DEVICE) $(ARDUINO_INCL)

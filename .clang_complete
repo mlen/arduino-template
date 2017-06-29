@@ -4,4 +4,6 @@
 -nobuiltininc
 -nostdlib
 -D__AVR_ATmega328P__
+
 -I/usr/share/arduino/hardware/arduino/avr/cores/arduino
+-I/usr/share/arduino/hardware/arduino/avr/variants/eightanaloginputs
