@@ -103,4 +103,3 @@ clean:
 	rm -rf build
 
 .PHONY: clean firmware flash
-.SUFFIXES:
