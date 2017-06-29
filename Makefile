@@ -47,7 +47,7 @@ SIZE     = avr-size
 firmware: build/$(TARGET).hex
 
 flash: build/$(TARGET).hex
-	@echo "FLASH $@"
+	@echo "FLASH $^"
 	@avrdude -c $(PROTOCOL) -P $(PORT) -p $(PARTNO) -D -U flash:w:build/$(TARGET).hex:i
 
 build/$(TARGET).elf: $(OBJS) $(ARDUINO_OBJS)
